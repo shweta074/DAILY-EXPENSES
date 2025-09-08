@@ -1,0 +1,113 @@
+{% comment %} 
+
+  <h1>My Daily Expenses</h1><br>
+        
+ <center><a href="{% url 'create' %}"><button class="btn btn-primary btn-lg custom-add-btn"type="submit">+Add Item</button></a></center><br> 
+ <table class="table table-striped table-hover shadow-lg rounded-3 overflow-hidden">
+    <thead class="bg-primary text-white">
+  <div class="table-responsive-sm">
+    <tr>
+        <th>name</th>
+        <th>Product_name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+        <th>Date</th>
+        <th>Pay_Type</th>
+      
+    </tr>
+    </thead>
+    <tbody>
+    
+       {% for ExpensesTracker in ExpensesTracker %}
+         <tr>
+             <td>{{ ExpensesTracker.name }}</td>
+             <td>{{ ExpensesTracker.product_name }}</td>
+             <td>{{ ExpensesTracker.price }}</td>
+             <td>{{ ExpensesTracker.quantity }}</td>
+             <td>{{ ExpensesTracker.total }}</td>
+             <td>{{ ExpensesTracker.created_at }}</td>
+             <td>{{ ExpensesTracker.pay_type }}</td>
+         </tr>  
+        {% endfor %}
+      </tbody>
+      </div>
+      </table>
+ {% endcomment %}
+
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Daily Expenses</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+
+  <!-- Title -->
+  <h1 class="fw-bold text-center text-primary mb-4">💰 My Daily Expenses</h1>
+
+  <!-- Add Item Button -->
+  <div class="text-center mb-4">
+    <a href="{% url 'create' %}" class="btn btn-lg btn-success">
+      ➕ Add Item
+    </a>
+  </div>
+
+  <!-- Table -->
+  <div class="card shadow-lg border-0 rounded-4">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle">
+          <thead class="table-primary text-center">
+            <tr>
+              <th>Name</th>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Unit</th>
+              <th>Total</th>
+              <th>Date</th>
+              <th>Pay Type</th>
+             
+             
+            </tr>
+          </thead>
+          <tbody class="table-primary text-center" >
+            {% for expense in ExpensesTracker %}
+            <tr>
+              <td>{{ expense.name }}</td>
+              <td>{{ expense.product_name }}</td>
+              <td>₹{{ expense.price }}</td>
+              <td>{{ expense.quantity }}</td>
+              <td>{{ expense.unit }}</td>
+              <td class="fw-bold text-success">₹{{ expense.total }}</td>
+              <td>{{ expense.created_at|date:"d M Y, H:i" }}</td>
+              <td><span class="badge bg-info">{{ expense.pay_type }}</span></td>
+             
+              
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="9" class="text-center text-muted">🚫 No expenses added yet</td>
+            </tr>
+            {% endfor %}
+           
+          </tbody>
+        </table>
+        <center><h3>Total:{{total}}</h3></center>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
