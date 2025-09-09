@@ -9,7 +9,7 @@ class ExpensesTrackerAdmin(admin.ModelAdmin):
         "price",
         "quantity",
         "total",
-        "created_at",
+        "create",
         "pay_type",
         "category",
     )

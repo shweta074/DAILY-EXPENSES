@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 class ExpensesTracker(models.Model):
@@ -27,7 +28,7 @@ class ExpensesTracker(models.Model):
             ("nos", "nos"),
         ],
     )
-    created_at = models.DateTimeField(auto_now_add=True)
+    create = models.DateTimeField(default=timezone.now)
     pay_type = models.CharField(
         max_length=50, choices=[("CASH", "Cash"), ("ONLINE", "Online")]
     )
